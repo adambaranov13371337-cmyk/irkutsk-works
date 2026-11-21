@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#232323">
+  <title>Работы · Портфолио</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="projects.js"></script>
+  <script defer src="field.js"></script>
+  <script defer src="viewer.js"></script>
+</head>
+<body>
+  <header><nav aria-label="Разделы"><a href="#works" id="works-tab" aria-current="page">Работы</a><a href="#about" id="about-tab">Обо мне</a></nav></header>
+  <main>
+    <aside class="sidebar">
+      <section id="catalog"><h1>Работы</h1><div id="projects"></div></section>
+      <section id="about" hidden><h1>Обо мне</h1><p>Я проектирую и разрабатываю сайты для бизнеса. В этих работах можно посмотреть мои варианты редизайна и сравнить их с оригиналами.</p></section>
+    </aside>
+    <section id="desk" aria-label="Область просмотра работ">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <section id="window" role="dialog" aria-labelledby="title" hidden>
+        <div id="bar">
+          <div id="handle" tabindex="0" title="Перетащить окно. Клавиши со стрелками перемещают его." aria-label="Переместить окно"><i class="folder" aria-hidden="true"></i><h2 id="title"></h2></div>
+          <button id="close" aria-label="Закрыть окно">×</button>
+        </div>
+        <video id="movie" muted playsinline loop controls controlslist="nodownload" preload="none" aria-label="Запись прокрутки"></video>
+        <footer>
+          <div class="modes" role="group" aria-label="Версия сайта">
+            <button data-mode="design" aria-pressed="true">Редизайн</button><button data-mode="original" aria-pressed="false">Оригинал</button>
+          </div>
+          <a id="visit" target="_blank" rel="noopener">Открыть сайт</a>
+        </footer>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
