@@ -39,10 +39,11 @@ function setVersion(next) {
   const path = 'media/' + project.id + (original ? '-original' : '');
   video.poster = path + '.webp';
   video.src = path + '.mp4';
-  video.setAttribute('aria-label', project.title + (original ? ', оригинал' : ', редизайн'));
+  const format = project.original ? (original ? 'оригинал' : 'редизайн') : 'сайт';
+  video.setAttribute('aria-label', project.title + ', ' + format);
   if (playRequested) video.play().catch(() => {});
-  get('visit').href = original ? project.original : demoRoot + project.path;
-  get('visit').textContent = original ? 'Открыть оригинал' : 'Открыть демо';
+  get('visit').href = original ? project.original : new URL(project.path, demoRoot).href;
+  get('visit').textContent = {оригинал:'Открыть оригинал', редизайн:'Открыть демо', сайт:'Открыть сайт'}[format];
   for (const button of document.querySelectorAll('[data-mode]')) {
     button.setAttribute('aria-pressed', String(button.dataset.mode === next));
   }
@@ -54,6 +55,7 @@ function openWindow(next) {
   pane.hidden = false;
   get('select-' + project.id).setAttribute('aria-expanded', 'true');
   get('title').textContent = project.title;
+  pane.querySelector('.modes').hidden = !project.original;
   playRequested = !reduceMotion.matches;
   setVersion('design');
   place((desk.clientWidth - pane.offsetWidth) / 2, (desk.clientHeight - pane.offsetHeight) / 2);

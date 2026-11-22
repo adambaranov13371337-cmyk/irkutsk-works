@@ -5,20 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#232323">
   <title>Работы · Портфолио</title>
-  <link rel="stylesheet" href="style.css?v=weave1">
-  <script defer src="projects.js"></script>
-  <script defer src="field.js?v=weave1"></script>
-  <script defer src="viewer.js"></script>
+  <link rel="stylesheet" href="style.css?v=pins2">
+  <script defer src="projects.js?v=pins2"></script>
+  <script defer src="field.js?v=pins2"></script>
+  <script defer src="viewer.js?v=pins2"></script>
 </head>
 <body>
   <header><nav aria-label="Разделы"><a href="#works" id="works-tab" aria-current="page">Работы</a><a href="#about" id="about-tab">Обо мне</a></nav></header>
   <main>
     <aside class="sidebar">
       <section id="catalog"><h1>Работы</h1><div id="projects"></div></section>
-      <section id="about" hidden><h1>Обо мне</h1><p>Я проектирую и разрабатываю сайты для бизнеса. В этих работах можно посмотреть мои варианты редизайна и сравнить их с оригиналами.</p></section>
+      <section id="about" hidden><h1>Обо мне</h1><p>Я проектирую и разрабатываю сайты для бизнеса. Здесь собраны мои проекты и редизайны. Для редизайнов можно посмотреть обе версии сайта.</p></section>
     </aside>
     <section id="desk" aria-label="Область просмотра работ">
-      <canvas id="field" tabindex="0" role="group" aria-label="Интерактивная сетка. Потяните и отпустите её. С клавиатуры используйте стрелки и пробел."></canvas>
+      <canvas id="field" tabindex="0" role="group" aria-label="Интерактивная сетка. Потяните край, чтобы закрепить его. Середина пружинит. С клавиатуры используйте стрелки и пробел."></canvas>
+      <div id="field-touch" aria-hidden="true"></div>
+      <button id="reset-field" type="button" aria-label="Выровнять сетку" title="Выровнять сетку">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10a7.8 7.8 0 1 1 .8 6M4.5 4.8V10h5.2"/></svg>
+      </button>
       <section id="window" role="dialog" aria-labelledby="title" hidden>
         <div id="bar">
           <div id="handle" tabindex="0" title="Перетащить окно. Клавиши со стрелками перемещают его." aria-label="Переместить окно"><i class="folder" aria-hidden="true"></i><h2 id="title"></h2></div>
