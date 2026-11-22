@@ -13,20 +13,8 @@ const projects = [
     path: 'baikal-irkutsk-demo/', original: 'https://arenda-baikal.ru/'
   },
   {
-    id: 'eli', title: 'Ели Estate',
-    path: 'https://maslakovbogdan.github.io/eli-demo/'
-  },
-  {
-    id: 'teefusion', title: 'TeeFusion',
-    path: 'https://maslakovbogdan.github.io/portfolio/teefusion/'
-  },
-  {
     id: 'ventkomplekt', title: 'ВентКомплект',
     path: 'ventkomplekt-demo/', original: 'https://lesa-nsk.ru/'
-  },
-  {
-    id: 'spaceweather', title: 'Spaceweather.com',
-    path: 'https://maslakovbogdan.github.io/portfolio/spaceweather/', original: 'https://spaceweather.com/'
   },
   {
     id: 'prkvostok', title: 'ПРК Восток',
@@ -59,10 +47,6 @@ const projects = [
   {
     id: 'depo', title: 'Депо',
     path: 'depo-irkutsk-demo/kopicentr.html', original: 'https://640480depo.wixsite.com/depo/kopicentr'
-  },
-  {
-    id: 'avtoelektrika', title: 'Автоэлектрика от А до Я',
-    path: 'https://maslakovbogdan.github.io/avtoelektrika/'
   },
   {
     id: 'tow38', title: 'Служба эвакуации 38',
