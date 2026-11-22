@@ -26,7 +26,8 @@ h1 { padding: 7px 2px; color: #bcbcbc; }
 .folder::before { content: ""; position: absolute; left: -1px; top: -4px; width: 5px; height: 2px; border: 1px solid #a5a5a5; border-bottom: none; }
 #about p { max-width: 39ch; line-height: 1.5; padding: 8px 2px; }
 #desk { position: relative; overflow: hidden; isolation: isolate; background: #070707; }
-#field { display: block; width: 100%; height: 100%; position: absolute; inset: 0; pointer-events: none; }
+#field { display: block; width: 100%; height: 100%; position: absolute; inset: 0; cursor: grab; touch-action: pan-y pinch-zoom; }
+#field.holding { cursor: grabbing; }
 #window { position: absolute; left: 0; top: 0; width: min(75%, 780px, calc((100dvh - 160px) * 1.65)); background: var(--paper); padding: 3px; border: 1px solid #929292; box-shadow: 0 10px 32px #0008; }
 #bar,footer { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
 #handle { align-self: stretch; flex: 1; min-width: 0; display: flex; align-items: center; gap: 7px; padding: 2px 5px; cursor: grab; user-select: none; touch-action: none; }

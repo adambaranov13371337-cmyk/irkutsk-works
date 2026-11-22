@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#232323">
   <title>Работы · Портфолио</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=weave1">
   <script defer src="projects.js"></script>
-  <script defer src="field.js"></script>
+  <script defer src="field.js?v=weave1"></script>
   <script defer src="viewer.js"></script>
 </head>
 <body>
@@ -18,7 +18,7 @@
       <section id="about" hidden><h1>Обо мне</h1><p>Я проектирую и разрабатываю сайты для бизнеса. В этих работах можно посмотреть мои варианты редизайна и сравнить их с оригиналами.</p></section>
     </aside>
     <section id="desk" aria-label="Область просмотра работ">
-      <canvas id="field" aria-hidden="true"></canvas>
+      <canvas id="field" tabindex="0" role="group" aria-label="Интерактивная сетка. Потяните и отпустите её. С клавиатуры используйте стрелки и пробел."></canvas>
       <section id="window" role="dialog" aria-labelledby="title" hidden>
         <div id="bar">
           <div id="handle" tabindex="0" title="Перетащить окно. Клавиши со стрелками перемещают его." aria-label="Переместить окно"><i class="folder" aria-hidden="true"></i><h2 id="title"></h2></div>
