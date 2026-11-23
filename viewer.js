@@ -104,15 +104,5 @@ handle.addEventListener('keydown', event => {
   if (delta) { event.preventDefault(); place(left + delta[0], topEdge + delta[1]); }
 });
 new ResizeObserver(() => { if (project) place(left, topEdge); }).observe(desk);
-function showSection() {
-  closeWindow();
-  const about = location.hash === '#about';
-  get('catalog').hidden = about;
-  get('about').hidden = !about;
-  get(about ? 'works-tab' : 'about-tab').removeAttribute('aria-current');
-  get(about ? 'about-tab' : 'works-tab').setAttribute('aria-current','page');
-  document.title = (about ? 'Обо мне' : 'Работы') + ' · Портфолио';
-}
 get('works-tab').addEventListener('click', () => closeWindow());
-window.addEventListener('hashchange', showSection);
-showSection();
+window.addEventListener('hashchange', () => closeWindow());
