@@ -2,14 +2,12 @@ const get = id => document.getElementById(id);
 const desk = get('desk');
 const pane = get('window');
 const handle = get('handle');
-const video = get('movie');
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const preview = get('preview');
+const mobileLayout = matchMedia('(max-width: 700px)');
 let project = null;
-let version = 'design';
 let drag = null;
 let left = 0;
 let topEdge = 0;
-let playRequested = !reduceMotion.matches;
 
 function place(x, y) {
   left = Math.max(0, Math.min(x, desk.clientWidth - pane.offsetWidth));
@@ -25,29 +23,22 @@ function closeWindow(restoreFocus = false) {
   const trigger = get('select-' + project.id);
   cancelDrag();
   pane.hidden = true;
-  video.pause();
-  video.removeAttribute('src');
-  video.removeAttribute('poster');
-  video.load();
+  preview.replaceChildren();
   trigger.setAttribute('aria-expanded', 'false');
   project = null;
   if (restoreFocus) trigger.focus();
 }
-function setVersion(next) {
-  version = next;
-  const original = next === 'original';
-  const path = 'media/' + project.id + (original ? '-original' : '');
-  video.poster = path + '.webp';
-  video.src = path + '.mp4';
-  const format = project.original ? (original ? 'оригинал' : 'редизайн') : 'сайт';
-  video.setAttribute('aria-label', project.title + ', ' + format);
-  if (playRequested) video.play().catch(() => {});
-  get('visit').href = original ? project.original : new URL(project.path, demoRoot).href;
-  get('visit').textContent = {оригинал:'Открыть оригинал', редизайн:'Открыть демо', сайт:'Открыть сайт'}[format];
-  for (const button of document.querySelectorAll('[data-mode]')) {
-    button.setAttribute('aria-pressed', String(button.dataset.mode === next));
-  }
+function sizePreview() {
+  const frame = preview.firstElementChild;
+  if (!frame || !preview.clientWidth) return;
+  const width = Math.max(preview.clientWidth, mobileLayout.matches ? 360 : 1280);
+  const scale = preview.clientWidth / width;
+  frame.style.width = width + 'px';
+  frame.style.height = Math.ceil(preview.clientHeight / scale) + 'px';
+  frame.style.transform = 'scale(' + scale + ')';
 }
+new ResizeObserver(sizePreview).observe(preview);
+mobileLayout.addEventListener('change', sizePreview);
 function openWindow(next) {
   if (project === next) { get('close').focus({preventScroll:true}); return; }
   closeWindow();
@@ -55,9 +46,15 @@ function openWindow(next) {
   pane.hidden = false;
   get('select-' + project.id).setAttribute('aria-expanded', 'true');
   get('title').textContent = project.title;
-  pane.querySelector('.modes').hidden = !project.original;
-  playRequested = !reduceMotion.matches;
-  setVersion('design');
+  const url = new URL(project.path, demoRoot).href;
+  const frame = document.createElement('iframe');
+  frame.title = project.title + ' — интерактивное демо';
+  frame.src = url;
+  preview.append(frame);
+  sizePreview();
+  get('visit').href = url;
+  get('original').hidden = !project.original;
+  if (project.original) get('original').href = project.original;
   place((desk.clientWidth - pane.offsetWidth) / 2, (desk.clientHeight - pane.offsetHeight) / 2);
   get('close').focus({preventScroll:true});
 }
@@ -74,14 +71,6 @@ for (const item of projects) {
   button.append(icon, item.title);
   button.addEventListener('click', () => openWindow(item));
   get('projects').append(button);
-}
-for (const button of document.querySelectorAll('[data-mode]')) {
-  button.addEventListener('click', () => {
-    if (version !== button.dataset.mode) {
-      playRequested = !video.paused;
-      setVersion(button.dataset.mode);
-    }
-  });
 }
 get('close').addEventListener('click', () => closeWindow(true));
 window.addEventListener('keydown', event => {
